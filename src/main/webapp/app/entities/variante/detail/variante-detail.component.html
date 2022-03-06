@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="variante">
+      <h2 data-cy="varianteDetailsHeading"><span>Variante</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id</span></dt>
+        <dd>
+          <span>{{ variante.id }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ variante.nom }}</span>
+        </dd>
+        <dt><span>Coups</span></dt>
+        <dd>
+          <span>{{ variante.coups }}</span>
+        </dd>
+        <dt><span>Ouverture</span></dt>
+        <dd>
+          <div *ngIf="variante.ouverture">
+            <a [routerLink]="['/ouverture', variante.ouverture?.id, 'view']">{{ variante.ouverture?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/variante', variante.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
