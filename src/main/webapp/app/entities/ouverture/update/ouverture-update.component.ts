@@ -23,6 +23,7 @@ export class OuvertureUpdateComponent implements OnInit {
     id: [],
     nom: [],
     couleur: [],
+    premierCoups: [],
     userId: [],
   });
 
@@ -83,6 +84,7 @@ export class OuvertureUpdateComponent implements OnInit {
       id: ouverture.id,
       nom: ouverture.nom,
       couleur: ouverture.couleur,
+      premierCoups: ouverture.premierCoups,
       userId: ouverture.userId,
     });
 
@@ -103,6 +105,7 @@ export class OuvertureUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       nom: this.editForm.get(['nom'])!.value,
       couleur: this.editForm.get(['couleur'])!.value,
+      premierCoups: this.editForm.get(['premierCoups'])!.value,
       userId: this.editForm.get(['userId'])!.value,
     };
   }

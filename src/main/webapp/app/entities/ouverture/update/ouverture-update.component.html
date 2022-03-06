@@ -26,6 +26,18 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_premierCoups">Premier Coups</label>
+          <input
+            type="text"
+            class="form-control"
+            name="premierCoups"
+            id="field_premierCoups"
+            data-cy="premierCoups"
+            formControlName="premierCoups"
+          />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="field_userId">User Id</label>
           <select class="form-control" id="field_userId" data-cy="userId" name="userId" formControlName="userId">
             <option [ngValue]="null"></option>

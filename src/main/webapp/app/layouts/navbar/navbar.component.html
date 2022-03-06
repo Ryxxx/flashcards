@@ -26,7 +26,16 @@
           </span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="ouvertures" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="folder"></fa-icon>
+            <span>Ouvertures</span>
+          </span>
+        </a>
+      </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+
       <li
         *ngSwitchCase="true"
         ngbDropdown

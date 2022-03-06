@@ -25,6 +25,7 @@ describe('Service Tests', () => {
         id: 0,
         nom: 'AAAAAAA',
         couleur: Couleur.BLANC,
+        premierCoups: 'AAAAAAA',
       };
     });
 
@@ -62,6 +63,7 @@ describe('Service Tests', () => {
             id: 1,
             nom: 'BBBBBB',
             couleur: 'BBBBBB',
+            premierCoups: 'BBBBBB',
           },
           elemDefault
         );
@@ -95,6 +97,7 @@ describe('Service Tests', () => {
             id: 1,
             nom: 'BBBBBB',
             couleur: 'BBBBBB',
+            premierCoups: 'BBBBBB',
           },
           elemDefault
         );
@@ -146,7 +149,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Ouverture to an array', () => {
-          const ouvertureArray: IOuverture[] = [{ id: 123 }, { id: 456 }, { id: 16883 }];
+          const ouvertureArray: IOuverture[] = [{ id: 123 }, { id: 456 }, { id: 77198 }];
           const ouvertureCollection: IOuverture[] = [{ id: 123 }];
           expectedResult = service.addOuvertureToCollectionIfMissing(ouvertureCollection, ...ouvertureArray);
           expect(expectedResult).toHaveLength(3);

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Mes ouvertures</h3>
+  </div>
+
+  <div class="col-sm-12">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let ouverture of ouvertures" (click)="goToVariantes(ouverture)">
+        <div class="col-sm-12">{{ ouverture.nom }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

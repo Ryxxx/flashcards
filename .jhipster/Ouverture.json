@@ -1,0 +1,47 @@
+{
+  "name": "Ouverture",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "couleur",
+      "fieldType": "Couleur",
+      "fieldValues": "BLANC,NOIR"
+    },
+    {
+      "fieldName": "premierCoups",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "ouverture",
+      "relationshipName": "userId",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "variante",
+      "otherEntityRelationshipName": "ouverture",
+      "relationshipName": "ouvertureId"
+    }
+  ],
+  "entityTableName": "ouverture",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20220302182333"
+}

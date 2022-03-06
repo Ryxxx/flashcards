@@ -6,6 +6,7 @@ export interface IOuverture {
   id?: number;
   nom?: string | null;
   couleur?: Couleur | null;
+  premierCoups?: string | null;
   userId?: IUser | null;
   ouvertureIds?: IVariante[] | null;
 }
@@ -15,6 +16,7 @@ export class Ouverture implements IOuverture {
     public id?: number,
     public nom?: string | null,
     public couleur?: Couleur | null,
+    public premierCoups?: string | null,
     public userId?: IUser | null,
     public ouvertureIds?: IVariante[] | null
   ) {}
