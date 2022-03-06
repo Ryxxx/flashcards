@@ -16,6 +16,7 @@ public class Variante implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "nom")
@@ -29,17 +30,18 @@ public class Variante implements Serializable {
     private Ouverture ouverture;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Variante id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Variante id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getNom() {
@@ -47,7 +49,7 @@ public class Variante implements Serializable {
     }
 
     public Variante nom(String nom) {
-        this.nom = nom;
+        this.setNom(nom);
         return this;
     }
 
@@ -60,7 +62,7 @@ public class Variante implements Serializable {
     }
 
     public Variante coups(String coups) {
-        this.coups = coups;
+        this.setCoups(coups);
         return this;
     }
 
@@ -72,13 +74,13 @@ public class Variante implements Serializable {
         return this.ouverture;
     }
 
+    public void setOuverture(Ouverture ouverture) {
+        this.ouverture = ouverture;
+    }
+
     public Variante ouverture(Ouverture ouverture) {
         this.setOuverture(ouverture);
         return this;
-    }
-
-    public void setOuverture(Ouverture ouverture) {
-        this.ouverture = ouverture;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

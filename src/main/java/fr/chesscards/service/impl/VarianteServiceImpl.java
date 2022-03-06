@@ -37,18 +37,16 @@ public class VarianteServiceImpl implements VarianteService {
 
         return varianteRepository
             .findById(variante.getId())
-            .map(
-                existingVariante -> {
-                    if (variante.getNom() != null) {
-                        existingVariante.setNom(variante.getNom());
-                    }
-                    if (variante.getCoups() != null) {
-                        existingVariante.setCoups(variante.getCoups());
-                    }
-
-                    return existingVariante;
+            .map(existingVariante -> {
+                if (variante.getNom() != null) {
+                    existingVariante.setNom(variante.getNom());
                 }
-            )
+                if (variante.getCoups() != null) {
+                    existingVariante.setCoups(variante.getCoups());
+                }
+
+                return existingVariante;
+            })
             .map(varianteRepository::save);
     }
 

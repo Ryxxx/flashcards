@@ -7,7 +7,6 @@ import fr.chesscards.service.MailService;
 import fr.chesscards.service.UserService;
 import fr.chesscards.service.dto.AdminUserDTO;
 import fr.chesscards.service.dto.PasswordChangeDTO;
-import fr.chesscards.service.dto.UserDTO;
 import fr.chesscards.web.rest.errors.*;
 import fr.chesscards.web.rest.vm.KeyAndPasswordVM;
 import fr.chesscards.web.rest.vm.ManagedUserVM;

@@ -37,21 +37,19 @@ public class OuvertureServiceImpl implements OuvertureService {
 
         return ouvertureRepository
             .findById(ouverture.getId())
-            .map(
-                existingOuverture -> {
-                    if (ouverture.getNom() != null) {
-                        existingOuverture.setNom(ouverture.getNom());
-                    }
-                    if (ouverture.getCouleur() != null) {
-                        existingOuverture.setCouleur(ouverture.getCouleur());
-                    }
-                    if (ouverture.getPremierCoups() != null) {
-                        existingOuverture.setPremierCoups(ouverture.getPremierCoups());
-                    }
-
-                    return existingOuverture;
+            .map(existingOuverture -> {
+                if (ouverture.getNom() != null) {
+                    existingOuverture.setNom(ouverture.getNom());
                 }
-            )
+                if (ouverture.getCouleur() != null) {
+                    existingOuverture.setCouleur(ouverture.getCouleur());
+                }
+                if (ouverture.getPremierCoups() != null) {
+                    existingOuverture.setPremierCoups(ouverture.getPremierCoups());
+                }
+
+                return existingOuverture;
+            })
             .map(ouvertureRepository::save);
     }
 

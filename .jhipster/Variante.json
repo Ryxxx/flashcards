@@ -1,5 +1,9 @@
 {
-  "name": "Variante",
+  "applications": "*",
+  "changelogDate": "20220302182334",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "variante",
   "fields": [
     {
       "fieldName": "id",
@@ -14,22 +18,18 @@
       "fieldType": "String"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Variante",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "many-to-one",
       "otherEntityName": "ouverture",
       "otherEntityRelationshipName": "ouvertureId",
-      "relationshipName": "ouverture"
+      "relationshipName": "ouverture",
+      "relationshipType": "many-to-one"
     }
   ],
-  "entityTableName": "variante",
-  "dto": "no",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": "*",
-  "changelogDate": "20220302182334"
+  "service": "serviceImpl"
 }

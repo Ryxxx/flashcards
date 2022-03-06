@@ -19,6 +19,7 @@ public class Ouverture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "nom")
@@ -40,17 +41,18 @@ public class Ouverture implements Serializable {
     private Set<Variante> ouvertureIds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Ouverture id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Ouverture id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getNom() {
@@ -58,7 +60,7 @@ public class Ouverture implements Serializable {
     }
 
     public Ouverture nom(String nom) {
-        this.nom = nom;
+        this.setNom(nom);
         return this;
     }
 
@@ -71,7 +73,7 @@ public class Ouverture implements Serializable {
     }
 
     public Ouverture couleur(Couleur couleur) {
-        this.couleur = couleur;
+        this.setCouleur(couleur);
         return this;
     }
 
@@ -84,7 +86,7 @@ public class Ouverture implements Serializable {
     }
 
     public Ouverture premierCoups(String premierCoups) {
-        this.premierCoups = premierCoups;
+        this.setPremierCoups(premierCoups);
         return this;
     }
 
@@ -96,17 +98,27 @@ public class Ouverture implements Serializable {
         return this.userId;
     }
 
+    public void setUserId(User user) {
+        this.userId = user;
+    }
+
     public Ouverture userId(User user) {
         this.setUserId(user);
         return this;
     }
 
-    public void setUserId(User user) {
-        this.userId = user;
-    }
-
     public Set<Variante> getOuvertureIds() {
         return this.ouvertureIds;
+    }
+
+    public void setOuvertureIds(Set<Variante> variantes) {
+        if (this.ouvertureIds != null) {
+            this.ouvertureIds.forEach(i -> i.setOuverture(null));
+        }
+        if (variantes != null) {
+            variantes.forEach(i -> i.setOuverture(this));
+        }
+        this.ouvertureIds = variantes;
     }
 
     public Ouverture ouvertureIds(Set<Variante> variantes) {
@@ -124,16 +136,6 @@ public class Ouverture implements Serializable {
         this.ouvertureIds.remove(variante);
         variante.setOuverture(null);
         return this;
-    }
-
-    public void setOuvertureIds(Set<Variante> variantes) {
-        if (this.ouvertureIds != null) {
-            this.ouvertureIds.forEach(i -> i.setOuverture(null));
-        }
-        if (variantes != null) {
-            variantes.forEach(i -> i.setOuverture(this));
-        }
-        this.ouvertureIds = variantes;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

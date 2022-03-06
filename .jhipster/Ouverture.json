@@ -1,5 +1,9 @@
 {
-  "name": "Ouverture",
+  "applications": "*",
+  "changelogDate": "20220302182333",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ouverture",
   "fields": [
     {
       "fieldName": "id",
@@ -19,29 +23,25 @@
       "fieldType": "String"
     }
   ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ouverture",
+  "pagination": "no",
+  "readOnly": false,
   "relationships": [
     {
-      "relationshipType": "one-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "ouverture",
+      "ownerSide": true,
       "relationshipName": "userId",
-      "ownerSide": true
+      "relationshipType": "one-to-one"
     },
     {
-      "relationshipType": "one-to-many",
       "otherEntityName": "variante",
       "otherEntityRelationshipName": "ouverture",
-      "relationshipName": "ouvertureId"
+      "relationshipName": "ouvertureId",
+      "relationshipType": "one-to-many"
     }
   ],
-  "entityTableName": "ouverture",
-  "dto": "no",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": "*",
-  "changelogDate": "20220302182333"
+  "service": "serviceImpl"
 }

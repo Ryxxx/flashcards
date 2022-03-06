@@ -8,26 +8,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 const environment = require('./environment');
+const proxyConfig = require('./proxy.conf');
 
-const tls = process.env.TLS;
-
-module.exports = (config, options, targetOptions) => {
-  config.cache = {
-    // 1. Set cache type to filesystem
-    type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname, '../target/webpack'),
-    buildDependencies: {
-      // 2. Add your config as buildDependency to get cache invalidation on config change
-      config: [
-        __filename,
-        path.resolve(__dirname, 'webpack.custom.js'),
-        path.resolve(__dirname, '../angular.json'),
-        path.resolve(__dirname, '../tsconfig.app.json'),
-        path.resolve(__dirname, '../tsconfig.json'),
-      ],
-    },
-  };
-
+module.exports = async (config, options, targetOptions) => {
   // PLUGINS
   if (config.mode === 'development') {
     config.plugins.push(
@@ -40,6 +23,13 @@ module.exports = (config, options, targetOptions) => {
       })
     );
   }
+
+  // configuring proxy for back end service
+  const tls = Boolean(config.devServer && config.devServer.https);
+  if (config.devServer) {
+    config.devServer.proxy = proxyConfig({ tls });
+  }
+
   if (targetOptions.target === 'serve' || config.watch) {
     config.plugins.push(
       new BrowserSyncPlugin(
@@ -49,6 +39,7 @@ module.exports = (config, options, targetOptions) => {
           https: tls,
           proxy: {
             target: `http${tls ? 's' : ''}://localhost:${targetOptions.target === 'serve' ? '4200' : '8080'}`,
+            ws: true,
             proxyOptions: {
               changeOrigin: false, //pass the Host header to the backend unchanged  https://github.com/Browsersync/browser-sync/issues/430
             },
@@ -95,7 +86,6 @@ module.exports = (config, options, targetOptions) => {
 
   config.plugins.push(
     new webpack.DefinePlugin({
-      __TIMESTAMP__: JSON.stringify(environment.__TIMESTAMP__),
       // APP_VERSION is passed as an environment variable from the Gradle / Maven build tasks.
       __VERSION__: JSON.stringify(environment.__VERSION__),
       __DEBUG_INFO_ENABLED__: environment.__DEBUG_INFO_ENABLED__ || config.mode === 'development',
@@ -103,7 +93,7 @@ module.exports = (config, options, targetOptions) => {
       // If this URL is left empty (""), then it will be relative to the current context.
       // If you use an API server, in `prod` mode, you will need to enable CORS
       // (see the `jhipster.cors` common JHipster property in the `application-*.yml` configurations)
-      __SERVER_API_URL__: JSON.stringify(environment.__SERVER_API_URL__),
+      SERVER_API_URL: JSON.stringify(environment.SERVER_API_URL),
     })
   );
 

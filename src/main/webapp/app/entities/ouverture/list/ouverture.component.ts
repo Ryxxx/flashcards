@@ -19,15 +19,15 @@ export class OuvertureComponent implements OnInit {
   loadAll(): void {
     this.isLoading = true;
 
-    this.ouvertureService.query().subscribe(
-      (res: HttpResponse<IOuverture[]>) => {
+    this.ouvertureService.query().subscribe({
+      next: (res: HttpResponse<IOuverture[]>) => {
         this.isLoading = false;
         this.ouvertures = res.body ?? [];
       },
-      () => {
+      error: () => {
         this.isLoading = false;
-      }
-    );
+      },
+    });
   }
 
   ngOnInit(): void {
