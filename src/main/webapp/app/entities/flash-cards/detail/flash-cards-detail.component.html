@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="flashCards">
+      <h2 data-cy="flashCardsDetailsHeading"><span>Flash Cards</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Id</span></dt>
+        <dd>
+          <span>{{ flashCards.id }}</span>
+        </dd>
+        <dt><span>Repetitions</span></dt>
+        <dd>
+          <span>{{ flashCards.repetitions }}</span>
+        </dd>
+        <dt><span>Qualite</span></dt>
+        <dd>
+          <span>{{ flashCards.qualite }}</span>
+        </dd>
+        <dt><span>Facilite</span></dt>
+        <dd>
+          <span>{{ flashCards.facilite }}</span>
+        </dd>
+        <dt><span>Intervalle</span></dt>
+        <dd>
+          <span>{{ flashCards.intervalle }}</span>
+        </dd>
+        <dt><span>Prochain Entrainement</span></dt>
+        <dd>
+          <span>{{ flashCards.prochainEntrainement | formatMediumDate }}</span>
+        </dd>
+        <dt><span>User Id</span></dt>
+        <dd>
+          <span>{{ flashCards.userId?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/flash-cards', flashCards.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

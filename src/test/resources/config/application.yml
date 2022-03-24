@@ -13,15 +13,25 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+eureka:
+  client:
+    enabled: false
+  instance:
+    appname: chessCardsBack
+    instanceId: chessCardsBack:${spring.application.instance-id:${random.value}}
+
 spring:
   profiles:
     # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
     #active: testcontainers
   application:
-    name: ChessCards
+    name: chessCardsBack
+  cloud:
+    config:
+      enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:chesscards;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:chesscardsback;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
@@ -53,17 +63,21 @@ spring:
     host: localhost
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   messages:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: chess-cards-task-
+      thread-name-prefix: chess-cards-back-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: chess-cards-scheduling-
+      thread-name-prefix: chess-cards-back-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -81,7 +95,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'chessCardsApp'
+    name: 'chessCardsBackApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -97,7 +111,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: NzFhNjk5OTVkY2FjYmNiMTdkYzU5MWE0NzQ0OGFmNGM4ZTkzMjBjOGJmYWQyOTNhOTRlZWUzZTFjMzJmOGRhNzZlYzMxZDM5NWExMzA2NTdhNDllY2NhZGVhNzliYzZkYTFhMTM3ZDY1YzU0Y2IxYWFhNTRlZDMyODEyMTRlZTc=
+        base64-secret: ZTFiZGUyZDhiMmIzNjM0MTg2ZTg0ZTJkMmQ2MWU4ODg2MjAzNzA3NzU4OGNjZTg5ODE0NmJjNjUwYzM2ZDBjNjBlZmY1ZDEwNTkxZDc5MGZkMDIxNzEyZTk1ZTZjOTg3OGQ2MTdjOTQ2NjEzNmZhNWI4MmU1ODMzNDFlNjY5MGY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
 # ===================================================================

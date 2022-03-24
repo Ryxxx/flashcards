@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-flash-cards-heading" data-cy="FlashCardsCreateUpdateHeading">Create or edit a Flash Cards</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_repetitions">Repetitions</label>
+          <input
+            type="number"
+            class="form-control"
+            name="repetitions"
+            id="field_repetitions"
+            data-cy="repetitions"
+            formControlName="repetitions"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_qualite">Qualite</label>
+          <input type="number" class="form-control" name="qualite" id="field_qualite" data-cy="qualite" formControlName="qualite" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_facilite">Facilite</label>
+          <input type="number" class="form-control" name="facilite" id="field_facilite" data-cy="facilite" formControlName="facilite" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_intervalle">Intervalle</label>
+          <input
+            type="number"
+            class="form-control"
+            name="intervalle"
+            id="field_intervalle"
+            data-cy="intervalle"
+            formControlName="intervalle"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_prochainEntrainement">Prochain Entrainement</label>
+          <div class="input-group">
+            <input
+              id="field_prochainEntrainement"
+              data-cy="prochainEntrainement"
+              type="text"
+              class="form-control"
+              name="prochainEntrainement"
+              ngbDatepicker
+              #prochainEntrainementDp="ngbDatepicker"
+              formControlName="prochainEntrainement"
+            />
+            <button type="button" class="btn btn-secondary" (click)="prochainEntrainementDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_userId">User Id</label>
+          <select class="form-control" id="field_userId" data-cy="userId" name="userId" formControlName="userId">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('userId')!.value?.id ? editForm.get('userId')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20220324171126",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "flash_cards",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "repetitions",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "qualite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "facilite",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "intervalle",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "prochainEntrainement",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "FlashCards",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "flashCards",
+      "ownerSide": true,
+      "relationshipName": "userId",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="FlashCardsHeading">
+    <span>Flash Cards</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-flash-cards"
+        [routerLink]="['/flash-cards/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Flash Cards </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="flashCards?.length === 0">
+    <span>No flashCards found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="flashCards && flashCards.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>Id</span></th>
+          <th scope="col"><span>Repetitions</span></th>
+          <th scope="col"><span>Qualite</span></th>
+          <th scope="col"><span>Facilite</span></th>
+          <th scope="col"><span>Intervalle</span></th>
+          <th scope="col"><span>Prochain Entrainement</span></th>
+          <th scope="col"><span>User Id</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flashCards of flashCards; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/flash-cards', flashCards.id, 'view']">{{ flashCards.id }}</a>
+          </td>
+          <td>{{ flashCards.repetitions }}</td>
+          <td>{{ flashCards.qualite }}</td>
+          <td>{{ flashCards.facilite }}</td>
+          <td>{{ flashCards.intervalle }}</td>
+          <td>{{ flashCards.prochainEntrainement | formatMediumDate }}</td>
+          <td>
+            {{ flashCards.userId?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/flash-cards', flashCards.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/flash-cards', flashCards.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(flashCards)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

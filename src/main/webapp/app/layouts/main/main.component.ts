@@ -23,9 +23,9 @@ export class MainComponent implements OnInit {
   }
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
-    let title: string = routeSnapshot.data['pageTitle'] ?? '';
+    const title: string = routeSnapshot.data['pageTitle'] ?? '';
     if (routeSnapshot.firstChild) {
-      title = this.getPageTitle(routeSnapshot.firstChild) || title;
+      return this.getPageTitle(routeSnapshot.firstChild) || title;
     }
     return title;
   }
@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   private updateTitle(): void {
     let pageTitle = this.getPageTitle(this.router.routerState.snapshot.root);
     if (!pageTitle) {
-      pageTitle = 'Chess Cards';
+      pageTitle = 'Chess Cards Back';
     }
     this.titleService.setTitle(pageTitle);
   }

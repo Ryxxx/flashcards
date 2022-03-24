@@ -1,0 +1,39 @@
+enum Couleur {
+  BLANC,
+  NOIR
+}
+
+entity Ouverture {
+	id Long,
+    nom String,
+    couleur Couleur,
+    premierCoups String
+}
+
+entity Variante {
+	id Long,
+    nom String,
+    coups String
+    
+}
+
+entity FlashCards {
+	id Long,
+    repetitions Integer,
+    qualite Integer,
+    facilite Double,
+    intervalle Integer
+    prochainEntrainement LocalDate
+}
+
+relationship OneToOne {
+    Ouverture{userId} to User
+    FlashCards{userId} to User
+}
+
+relationship OneToMany {
+	Ouverture{ouvertureId} to Variante
+}
+
+// Set service options to all except few
+service all with serviceImpl

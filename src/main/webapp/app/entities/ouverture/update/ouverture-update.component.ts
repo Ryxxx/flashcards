@@ -9,6 +9,7 @@ import { IOuverture, Ouverture } from '../ouverture.model';
 import { OuvertureService } from '../service/ouverture.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
+import { Couleur } from 'app/entities/enumerations/couleur.model';
 
 @Component({
   selector: 'jhi-ouverture-update',
@@ -16,6 +17,7 @@ import { UserService } from 'app/entities/user/user.service';
 })
 export class OuvertureUpdateComponent implements OnInit {
   isSaving = false;
+  couleurValues = Object.keys(Couleur);
 
   usersSharedCollection: IUser[] = [];
 
@@ -61,10 +63,10 @@ export class OuvertureUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IOuverture>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
-      () => this.onSaveSuccess(),
-      () => this.onSaveError()
-    );
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
   }
 
   protected onSaveSuccess(): void {

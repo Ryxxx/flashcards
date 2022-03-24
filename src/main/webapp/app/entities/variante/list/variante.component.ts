@@ -19,15 +19,15 @@ export class VarianteComponent implements OnInit {
   loadAll(): void {
     this.isLoading = true;
 
-    this.varianteService.query().subscribe(
-      (res: HttpResponse<IVariante[]>) => {
+    this.varianteService.query().subscribe({
+      next: (res: HttpResponse<IVariante[]>) => {
         this.isLoading = false;
         this.variantes = res.body ?? [];
       },
-      () => {
+      error: () => {
         this.isLoading = false;
-      }
-    );
+      },
+    });
   }
 
   ngOnInit(): void {

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "chess-cards": {
+    "chess-cards-back": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -84,16 +84,15 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "chess-cards:build:development",
-            "proxyConfig": "./webpack/proxy.conf.js",
+            "browserTarget": "chess-cards-back:build:development",
             "port": 4200
           },
           "configurations": {
             "production": {
-              "browserTarget": "chess-cards:build:production"
+              "browserTarget": "chess-cards-back:build:production"
             },
             "development": {
-              "browserTarget": "chess-cards:build:development"
+              "browserTarget": "chess-cards-back:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -107,8 +106,13 @@
       }
     }
   },
-  "defaultProject": "chess-cards",
+  "defaultProject": "chess-cards-back",
   "cli": {
+    "cache": {
+      "enabled": true,
+      "path": "./target/angular/",
+      "environment": "all"
+    },
     "packageManager": "npm"
   }
 }
